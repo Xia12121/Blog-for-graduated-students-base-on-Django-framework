@@ -1,0 +1,360 @@
+{% load static %}
+    <!DOCTYPE html>
+    <html lang="zxx" class="no-js">
+    <head>
+        <!-- Mobile Specific Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Favicon-->
+        <link rel="icon" href="{% static 'media/fav.png' %}">
+        <!-- Author Meta -->
+        <meta name="author" content="colorlib">
+        <!-- Meta Description -->
+        <meta name="description" content="">
+        <!-- Meta Keyword -->
+        <meta name="keywords" content="">
+        <!-- meta character set -->
+        <meta charset="UTF-8">
+        <!-- Site Title -->
+        <title>Blogger</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+
+        <style type="text/css">
+            .popup1 {
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.4);
+                display: none;
+            }
+            .popup-content {
+                position: fixed;
+                bottom: 0;
+                right: 20px;
+                width: 300px;
+                height: 400px;
+                background-color: #fefefe;
+                padding: 20px;
+                border-radius: 10px 10px 0 0;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                }
+
+                .close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                font-size: 24px;
+            }
+
+
+
+            #sendButton {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 0 4px 4px 0;
+            font-size: 16px;
+            }
+        </style>
+
+            <!--
+            CSS
+            ============================================= -->
+            <link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+            <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+            <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+            <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        </head>
+        <body>
+            <link rel="stylesheet" type="text/css" href="{% static 'poup.css' %}">
+			<div class="hover-box">Welcome
+				<h5 id="username" >{{ user.username}}</h5>
+			</div>
+
+            <!-- Start Header Area -->
+            <header class="default-header">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container">
+                          <a class="navbar-brand" href="index.html">
+                            <img src="{% static 'media/src/img/first_page_logo.jpeg' %}" alt="" width="20%" height="20%">
+                          </a>
+                          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+
+                          <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                            <ul class="navbar-nav scrollable-menu">
+                                <li><a href="{% url 'blog' %}">HOME</a></li>
+								<li><a href="{% url 'blog_list' %}">BLOG</a></li>
+								<li><a href="{% url 'write' %}">NEW</a></li>
+								<li><a href="{% url 'search' %}">SEARCH</a></li>
+								<li><a href="{% url 'article_follow_list' %}">follow</a></li>
+								<!-- Dropdown -->
+                                                             
+                            </ul>
+                          </div>                        
+                    </div>
+                    <a class="navbar-brand" href="{% url 'homegape' %}" >
+						<img src="{% static user.avatar.url %}" alt="" width="50" height="50">
+					</a>
+                </nav>
+            </header>
+            <!-- End Header Area -->
+
+            <!-- Start top-section Area -->
+            <section class="top-section-area section-gap">
+                <div class="container">
+                    <div class="row justify-content-start align-items-center d-flex">
+                        <div class="col-lg-8 top-left">
+                            <h1 class="text-white mb-20">{{ user.username}}'s PERSONAL PAGE</h1>
+                            
+                        </div>
+                    </div>
+                </div>  
+            </section>
+            <!-- End top-section Area -->
+
+    
+    <!-- Start post Area -->
+    <div class="post-wrapper pt-100">
+        <!-- Start post Area -->
+        <section class="post-area">
+            <div class="container">
+                <div class="row justify-content-center d-flex">
+                    
+                    <div class="col-lg-8">
+                        
+                        <div class="single_widget recent_widget">
+                            <h4 class="text-uppercase pb-20">What you interested in:</h4>
+                            <div class="active-recent-carusel">
+                                {% for article in articles %}
+                                <div class="single-list flex-row d-flex">
+                                    <div class="thumb">
+                                        <div class="date">
+                                            <span>{{ article.created_at|date:"d " }}</span><br>{{ article.created_at|date:"M" }}
+                                        </div>
+                                        <a href="{% url 'personal_homepage_other' username=article.author.username %}">
+                                            <img class="img-fluid d-flex  mr-3" style="width: 200px;height: 200px;" src="{% static article.author.avatar.url %}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="detail">
+                                        <a href="{% url 'article_detail' article.id%}">
+                                            {% if article.is_alumni %}
+                                            <h4 class="about-title mb-30">{{ article.title|linebreaksbr|safe }} <span style="color: gold; font-size: 1.2em;">&#9733;</span></h4>
+                                            {% else %}
+                                            <h4 class="about-title mb-30">{{ article.title|linebreaksbr|safe }}</h4>
+                                            {% endif %}</a>
+                                        <p>
+                                            {{ article.content|slice:":20" }}{% if article.content.split|length > 20 %}...{% endif %}
+                                        </p>
+                                        <p class="footer pt-20">
+                                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                        <a href="#">{{ article.likes.count }} Likes</a>     <i class="ml-20 fa fa-comment-o" aria-hidden="true"></i> <a href="#">{{ article.comments.count }} Comments</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                {% endfor %}                                                                                        
+                            </div>
+                        </div> 
+                                      
+
+
+                    </div>
+                    <div class="col-lg-4 sidebar-area">
+                        <div class="single_widget search_widget">
+                            <div id="imaginary_container"> 
+                                <div class="input-group stylish-input-group">
+                                    <input type="text" class="form-control"  placeholder="Search" >
+                                    <span class="input-group-addon">
+                                        <button type="submit">
+                                            <span class="lnr lnr-magnifier"></span>
+                                        </button>  
+                                    </span>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="single_widget about_widget">
+                            <img src="{% static user.avatar.url %}" href="javascript:void(0)" alt="" class="" width="260" height="260" >
+                            <h2 class="text-uppercase">{{user.username}}</h2>
+                            <p>
+                                {{user.personal_statement}}
+
+
+                               
+                    
+                            </p>
+                            <a href="{% url 'management' %}">Manage Account</a>
+
+                            <div class="popup1" id="my-popup">
+                                <span class="close">&times;</span>
+                                <div class="popup-content">
+                                  <form method="post" enctype="multipart/form-data" action="{% url 'upload_avatar' %}">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <input type="file" name="avatar" id="id_avatar" accept="image/*">
+                                    <input type="submit" value="保存">
+                                  </form>
+                              
+                                  <form method="post" action="{% url 'update_personal_statement' %}">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                      <label for="personal_statement">个人陈述：</label>
+                                      <textarea class="form-control" name="personal_statement" id="personal_statement" rows="3">{{ user.personal_statement }}</textarea>
+                                    </div>
+                                    <input type="submit" class="btn btn-primary" value="保存">
+                                  </form>
+
+                                  <form method="post" action="{% url 'modify_password_here' %}">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                      <label for="old_password">旧密码：</label>
+                                      <input type="password" class="form-control" name="old_password" id="old_password" required>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="new_password">新密码：</label>
+                                      <input type="password" class="form-control" name="new_password" id="new_password" required>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="confirm_password">确认新密码：</label>
+                                      <input type="password" class="form-control" name="confirm_password" id="confirm_password" required>
+                                    </div>
+                                    <input type="submit" class="btn btn-primary" value="保存">
+                                  </form>
+                                  <form method="post" enctype="multipart/form-data" action="{% url 'create_offer' %}">
+                                    {% csrf_token %}
+                                    <label for="gpa">绩点：</label>
+                                    <input type="number" name="gpa" required><br>
+                                    <label for="ielts_score">雅思成绩：</label>
+                                    <input type="number" name="ielts_score" required><br>
+                                    <label for="institution">院校或单位：</label>
+                                    <input type="text" name="institution" required><br>
+                                    <label for="major">专业：</label>
+                                    <input type="text" name="major" required><br>
+                                    <label for="offer_image">Offer图片：</label>
+                                    <input type="file" name="offer_image" required><br>
+                                    <button type="submit">上传</button>
+                                </form>
+                                
+                                </div>
+                              </div>
+                              
+
+
+                           
+                        </div>
+                        
+                        <div class="single_widget recent_widget">
+                            <h4 class="text-uppercase pb-20">Recent Posts</h4>
+                            <div class="active-recent-carusel">
+                                {% for article in personal_article %}
+   
+                                <div class="item">
+                                    <a href="{% url 'article_detail' article.id%}">
+                                        <p class="mt-20 title text-uppercase" >     {{ article.title }}</p>
+                                    </a>
+                                    <p>{{ article.author.username }} <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    {{ article.likes.count }} <i class="fa fa-comment-o" aria-hidden="true"></i>{{ article.comments.count }}</span></p>    
+                                </div>
+                            
+                        {% endfor %}                                                                                            
+                            </div>
+                        </div>  
+                        <div class="single_widget cat_widget">
+                            <h4 class="text-uppercase pb-20">post archive</h4>
+                            <ul>
+                                {% for message in private_message %}
+                                <li>
+                                    <a class="show-popup" data-target="popup-{{ forloop.counter }}">{{ message.content|slice:":10" }} <span>{{ message.sender }}</span></a>
+                                </li>
+
+                                <div class="popup1" id="popup-{{ forloop.counter }}">
+                                    
+                                    <div class="popup-content">
+                                        <span class="close">&times;</span>
+                                        <h2>Reply message</h2>
+                                        <a><h4>Message:{{ message.content}}</h4></a>
+                                        <form method="POST" action="{% url 'send_message' message.sender.username %}">
+                                            {% csrf_token %}
+                                            <input id="userInput" type="hidden" name="current_url" value="{{ request.path }}">
+                                            
+                                            <textarea id="userInput" name="content" required></textarea>
+                                            <br><br>
+                                            <button id="sendButton" type="submit">Send</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endfor %}                         
+                            </ul>
+                        </div> 
+                        <div class="single_widget tag_widget">
+                            <h4 class="text-uppercase pb-20">Tag you interested in</h4>
+                            <ul>
+                                {% for tag in tags %}
+                                    <li><a href="{% url 'tag_article' tag_name=tag.name %}">{{ tag.name }}</a></li>
+                                {% empty %}
+                                    <li>This author is lazy and has not written any tags.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>                                    
+                    </div>
+                </div>
+            </div>    
+        </section>
+        <!-- End post Area -->  
+    </div>
+    <!-- End post Area -->
+    
+
+
+        
+
+
+
+
+
+            <script type="text/javascript">
+		var popup = document.getElementById('my-popup');
+		var showPopup = document.getElementById('show-popup');
+		var close = document.getElementsByClassName('close')[0];
+
+		showPopup.onclick = function() {
+			popup.style.display = "block";
+		}
+
+		close.onclick = function() {
+			popup.style.display = "none";
+		}
+
+        
+                var showPopupButtons = document.getElementsByClassName('show-popup');
+                var closeButtons = document.getElementsByClassName('close');
+
+                for (var i = 0; i < showPopupButtons.length; i++) {
+                    showPopupButtons[i].onclick = function() {
+                        var popupId = this.getAttribute('data-target');
+                        var popup = document.getElementById(popupId);
+                        popup.style.display = "block";
+                    }
+                }
+
+                for (var i = 0; i < closeButtons.length; i++) {
+                    closeButtons[i].onclick = function() {
+                        var popup = this.parentElement;
+                        popup.style.display = "none";
+                    }
+                }
+
+            
+	</script>
+            
+        </body>
+    </html>

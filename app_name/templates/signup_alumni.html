@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GPS Service Sign up</title>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <style>
+        /* 在此处添加内联样式 */
+        /* 在此处添加内联样式 */
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 999;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            background-image: url("your-logo-image-url");
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                <div class="logo-container">
+                    <div class="logo-image"></div>
+                </div>
+                
+                
+                <form id="login-form" class="sihnup" method="POST" action="{% url 'register_alumni' %}">
+                    {% csrf_token %}
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" name="username" class="login__input username-input" id="username-input" placeholder="User name" required>
+                    </div>
+                
+                    <div class="login__field">
+                        <i class="login__icon fas fa-envelope"></i>
+                        <input type="email" name="email" class="login__input email-input" id="email-input" placeholder="Email" required>
+                    </div>
+                
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" name="account_number" class="login__input account-input" id="account-input" placeholder="Account" required>
+                    </div>
+                
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="password" name="password" class="login__input password-input" id="password-input" placeholder="Password" required>
+                    </div>
+
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="number" name="gpa" class="login__input password-input" id="gpa-input" placeholder="gpa" required>
+                    </div>
+
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" name="graduation_destination" class="login__input graduation_destination-input" id="graduation_destination-input" placeholder="graduation_destination" required>
+                    </div>
+                
+                    <button id="signup-submit-button" class="button login__submit" type="submit">
+                        <span class="button__text">Sign up Now</span>
+                        <i class="button__icon fas fa-chevron-right"></i>
+                    </button>
+                    <p class="signup-link"><a href="{% url 'index' %}">Already have account</a></p>
+                    <p class="signup-link"><a href="{% url 'signup' %}">Normal registration</a></p>
+                </form>
+                
+
+
+
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    
+</body>
+</html>

@@ -1,0 +1,443 @@
+	<!DOCTYPE html>
+	{% load static %}
+	<html lang="zxx" class="no-js">
+	<head>
+		
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		
+		<link rel="icon" href="{% static 'media/fav.png' %}">
+		<!-- Author Meta -->
+		<meta name="author" content="colorlib">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Blogger</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+			<!--
+			CSS
+			============================================= -->
+			<style type="text/css">
+            .popup1 {
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0, 0, 0, 0.4);
+                display: none;
+            }
+            .popup-content {
+                position: fixed;
+                bottom: 0;
+                right: 20px;
+                width: 300px;
+                height: 400px;
+                background-color: #fefefe;
+                padding: 20px;
+                border-radius: 10px 10px 0 0;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                }
+
+                .close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                font-size: 24px;
+            }
+
+
+
+            #sendButton {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 0 4px 4px 0;
+            font-size: 16px;
+            }
+				#article-content {
+				display: article-content; /* 将div设置为内联块级元素，使其宽度与内容一致 */
+				}
+
+				table {
+				width: 100%; /* 将表格宽度设置为100% */
+				border-collapse: collapse; /* 合并边框 */
+				}
+
+				th:first-child {
+					background-color: #96b8ec; /* 设置第一个<th>元素（Username）的底色颜色为淡蓝色 */
+					}
+
+					th[colspan="2"] {
+					background-color: #96b8ec; /* 设置跨列的<th>元素（Standardized score:）的底色颜色为淡蓝色 */
+					}
+
+					th:nth-of-type(3) {
+					background-color: #96b8ec; /* 设置第三个<th>元素（School or institution）的底色颜色为淡蓝色 */
+					}
+					th:nth-of-type(-n+3) {
+					background-color: #96b8ec; /* 设置前三个<th>元素的底色颜色为淡蓝色 */
+					}
+
+
+					th:last-child {
+					background-color: #96b8ec; /* 设置最后一个<th>元素（Majority和Standardized score:）的底色颜色为淡蓝色 */
+					}
+					.horizontal-bar-chart {
+						width: 100%;
+						position: relative;
+						width: 650px;
+						height: 30px;
+						margin: 0 auto;
+						}
+
+						.bar {
+						position: relative;
+						width: 100%;
+						height: 100%;
+						background-color: #ccc;
+						}
+
+						.bar-fill {
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: var(--percentage);
+						height: 100%;
+						background-color: #007bff;
+						}
+
+						.bar-percentage {
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+						font-size: 12px;
+						font-weight: bold;
+						color: #000000;
+						}
+
+
+
+			</style>
+			<link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+			<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+			<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+			<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">			
+			<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+			<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'css/main.css' %}">
+			<link rel="stylesheet" href="{% static 'css/like.css' %}">
+			<link rel="stylesheet" href="{% static 'css/button.css' %}">
+		</head>
+		<body>
+			<link rel="stylesheet" type="text/css" href="{% static 'poup.css' %}">
+			<div class="hover-box">Welcome
+				<h5 id="username" >{{user.username}}</h5>
+			</div>
+
+
+			<!-- Start Header Area -->
+            <header class="default-header">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container">
+                          <a class="navbar-brand" href="index.html">
+                            <img src="{% static 'media/src/img/first_page_logo.jpeg' %}" alt="" width="20%" height="20%">
+                          </a>
+                          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+
+                          <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                            <ul class="navbar-nav scrollable-menu">
+                                <li><a href="{% url 'blog' %}">HOME</a></li>
+								<li><a href="{% url 'blog_list' %}">BLOG</a></li>
+								<li><a href="{% url 'write' %}">NEW</a></li>
+								<li><a href="{% url 'search' %}">SEARCH</a></li>
+								<li><a href="{% url 'article_follow_list' %}">follow</a></li>
+								<!-- Dropdown -->
+                                                           
+                            </ul>
+                          </div>                        
+                    </div>
+                    <a class="navbar-brand" href="{% url 'homegape' %}" >
+						<img src="{% static user.avatar.url %}" alt="" width="50" height="50">
+					</a>
+                </nav>
+            </header>
+            <!-- End Header Area -->				
+				
+			</section>		
+			<!-- End banner Area -->
+		
+		<!-- About Generic Start -->
+		<!-- About Generic Start -->
+		
+
+
+<!-- Start post Area -->
+<div class="post-wrapper pt-100">
+	<!-- Start post Area -->
+	<section class="post-area">
+		<div class="container">
+			<div class="row justify-content-center d-flex">
+				
+				<div class="col-lg-8">
+					
+					<div class="single_widget recent_widget">
+						{% if article.is_alumni %}
+						<h3 class="about-title mb-30">{{ article.title|linebreaksbr|safe }} <span style="color: gold; font-size: 1.2em;">&#9733;</span></h3>
+						{% else %}
+						<h3 class="about-title mb-30">{{ article.title|linebreaksbr|safe }}</h3>
+						{% endif %}
+						
+						<div class="active-recent-carusel">
+							<h3>Offer detail of {{Offer.institution}}</h3>
+							<div class="row">
+								
+								<div class="col-md-12">
+									
+									<div class="img-text">
+										<div id="article-content">
+							
+											<table border="1">
+												<tr>
+												  <th>Username</th>
+												  <th colspan="2">{{Offer.applicant.username}}</th>
+												</tr>
+												<tr>
+												  <th rowspan="2">Standardized score:</th>
+												  <td>GPA</td><td>{{Offer.gpa}}</td>
+												</tr>
+												<tr>
+												  <td>IELTS</td><td>{{Offer.ielts_score}}</td>
+												</tr>
+												<tr>
+												  <th>School or institution</th><th colspan="2">{{Offer.institution}}</th>
+												</tr>
+												<tr>
+												  <th>Majority</th><th colspan="2">CS</th>
+												</tr>
+												<tr>
+												  <th rowspan="3">Standardized score:</th>
+												  <td>Year</td><td>{{Offer.received_at|date:"Y"}}</td>
+												</tr>
+												<tr>
+												  <td>Month</td><td>{{Offer.received_at|date:"M"}}</td>
+												</tr>
+												<tr>
+												  <td>Date</td><td>{{Offer.received_at|date:"d"}}</td>
+												</tr>
+												</table>
+
+												<br>
+												<h5>  {{Offer.applicant.username}}'s IELTS grade higher than {{ higher_ielts_percent }}% applicants.</h5>
+												<br>
+												<div class="horizontal-bar-chart" style="--percentage: {{ higher_ielts_percent }}%;">
+													
+													<div class="bar">
+														<div class="bar-fill"></div>
+													</div>
+													<div class="bar-percentage">{{ higher_ielts_percent }}%</div>
+												</div>
+
+												<br>
+												<h5>  {{Offer.applicant.username}}'s GPA higher than {{ higher_gpa_percent }}% applicants.</h5>
+												<br>
+												<div class="horizontal-bar-chart" style="--percentage: {{ higher_gpa_percent }}%;">
+													
+													<div class="bar">
+														<div class="bar-fill"></div>
+													</div>
+													<div class="bar-percentage">{{ higher_gpa_percent }}%</div>
+												</div>
+												
+
+												<div id="gpaPercentagesData" data-percentages="{{ gpa_percentages|safe }}" style="display:none;"></div>
+												<br>
+												<h5>GPA distribution of {{Offer.institution}} applicants</h5>
+												<br>
+												<div style="display: flex; justify-content: center; width: 100%;">
+													<div style="width: 400px; height: 400px;">
+														<canvas id="gpaPercentageChart"></canvas>
+													</div>
+												</div>
+												
+												
+										</div>
+										
+										  
+
+										
+
+										
+									</div>
+									
+									
+									
+				
+									
+									
+									
+									
+								</div>
+								
+							</div>
+
+
+
+
+																			  
+						</div>
+					</div> 
+								  
+
+
+				</div>
+				<div class="col-lg-4 sidebar-area">
+					
+
+					<div class="single_widget about_widget">
+						<img src="{% static Offer.applicant.avatar.url %}" alt="" width="260" height="260">
+						<h2 class="text-uppercase">{{Offer.applicant.username}}</h2>
+						<p>
+							{{Offer.applicant.personal_statement}}
+						</p>
+						
+						<div class="social-link">
+							<a id="show-popup"><button class="btn"><i class="fa fa-facebook" aria-hidden="true"></i> message</button></a><br><br>
+							<form action="{% url 'follow' username_idol=Offer.applicant.username %}" method="POST">
+								{% csrf_token %}
+								<button class="btn"><i class="fa fa-facebook"></i> Follow</button>
+							</form>
+							
+							
+							<div class="popup1" id="my-popup">
+								
+								
+								<div class="popup-content">
+									<span class="close">&times;</span>
+								  <h2>Send a message to {{Offer.applicant.username}}</h2>
+								  <form method="POST" action="{% url 'send_message' Offer.applicant.username %}">
+									{% csrf_token %}
+									<input id="userInput" type="hidden" name="current_url" value="{{ request.path }}">
+									<textarea id="userInput" name="content" required></textarea>
+									<br><br>
+									<button id="sendButton" type="submit">Send</button>
+								</form>
+								</div>
+							  </div>
+						</div>
+					</div>
+					
+					<div class="single_widget recent_widget">
+						<h4 class="text-uppercase pb-20">Recent Posts by him/her</h4>
+						<div class="active-recent-carusel">
+							{% for article in personal_article %}
+
+								<div class="item">
+									<a href="{% url 'article_detail' article.id%}">
+										<p class="mt-20 title text-uppercase" >     {{ article.title|slice:":20" }}</p>
+									</a>
+									<p>{{ article.author.username }} <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
+									{{ article.likes.count }} <i class="fa fa-comment-o" aria-hidden="true"></i>{{ article.comments.count }}</span></p>    
+								</div>
+							
+						{% endfor %}                                                                                             
+						</div>
+					</div>  
+					
+															
+				</div>
+			</div>
+		</div>    
+	</section>
+	<!-- End post Area -->  
+</div>
+<!-- End post Area -->
+
+
+
+
+
+		<script type="text/javascript">
+			var popup = document.getElementById('my-popup');
+			var showPopup = document.getElementById('show-popup');
+			var close = document.getElementsByClassName('close')[0];
+			
+
+			showPopup.onclick = function() {
+				popup.style.display = "block";
+			}
+
+			close.onclick = function() {
+				popup.style.display = "none";
+			}
+		</script>
+		<script>
+			// 获取 canvas 元素
+			const ctx = document.getElementById('gpaPercentageChart').getContext('2d');
+		
+			// 从隐藏的 div 元素获取后端数据
+			const gpaPercentagesData = document.getElementById('gpaPercentagesData');
+    		const gpaPercentages = JSON.parse(gpaPercentagesData.getAttribute('data-percentages'));
+		
+			// 饼状图的颜色
+			const colors = [
+				'#FF6384',
+				'#36A2EB',
+				'#FFCE56',
+				'#4BC0C0',
+				'#FF9F40',
+				'#9966FF',
+			];
+		
+			// 饼状图的标签
+			const labels = [
+				'0-2',
+				'2-2.5',
+				'2.5-3',
+				'3-3.5',
+				'3.5-3.8',
+				'3.8+',
+			];
+		
+			// 创建饼状图
+			const gpaPercentageChart = new Chart(ctx, {
+				type: 'pie',
+				data: {
+					labels: labels,
+					datasets: [{
+						data: gpaPercentages,
+						backgroundColor: colors,
+					}],
+				},
+				options: {
+					responsive: true,
+					plugins: {
+						legend: {
+							position: 'top',
+						},
+						title: {
+							display: true,
+							
+						}
+					}
+				}
+			});
+		</script>
+		
+	</body>
+</html>

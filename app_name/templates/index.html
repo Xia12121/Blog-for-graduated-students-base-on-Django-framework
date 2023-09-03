@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>GPS Service</title>
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <style>
+        /* 在此处添加内联样式 */
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 999;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            background-image: url("src/img/UIC_logo.png");
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                <div class="logo-container">
+                    <div class="logo-image"></div>
+                </div>
+                <form id="login-form" class="login" method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="login__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" class="login__input username-input" name="account_number" placeholder="Account">
+                    </div>
+                    <div class="login__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="password" class="login__input password-input" name="password" placeholder="Password">
+                    </div>
+                    <button id="login-submit-button" class="button login__submit" type="submit">
+                        <span class="button__text">Log In Now</span>
+                        <i class="button__icon fas fa-chevron-right"></i>
+                    </button>
+                    <p class="signup-link"><a href="{% url 'signup' %}">Sign up now!</a></p>
+                </form>
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

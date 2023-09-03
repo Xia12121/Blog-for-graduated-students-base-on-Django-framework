@@ -1,0 +1,433 @@
+﻿{% load static %}
+	<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	<head>
+
+		  
+		  <!-- 在页面上显示用户名 -->
+		  
+		  
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="icon" href="{% static 'media/fav.png' %}">
+		<!-- Author Meta -->
+		<meta name="author" content="colorlib">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="piup.css">
+		<title>Blogger</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+			<!--
+			CSS
+			============================================= -->
+			{% load static %}
+			<link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+			{% load static %}
+			<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+			{% load static %}
+			<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+			{% load static %}
+			<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+			{% load static %}
+			<link rel="stylesheet" href="{% static 'css/main.css' %}">
+			<script>
+				document.addEventListener("DOMContentLoaded", function() {
+				const floatingButton = document.getElementById("floatingButton");
+				const chatModal = document.getElementById("chatModal");
+				const closeModal = document.querySelector(".close");
+				const sendButton = document.getElementById("sendButton");
+				const userInput = document.getElementById("userInput");
+				const messages = document.getElementById("messages");
+				
+				floatingButton.addEventListener("click", function() {
+					chatModal.classList.toggle("hiddena");
+					//alert("运行到这个函数了")
+				});
+
+				closeModal.addEventListener("click", function() {
+					chatModal.classList.add("hiddena");
+					//alert("运行到这个函数了")
+				});
+
+				sendButton.addEventListener("click", function() {
+					sendMessage();
+				});
+
+				userInput.addEventListener("keydown", function(event) {
+					if (event.key === "Enter") {
+					event.preventDefault();
+					sendMessage();
+					}
+				});
+
+				function getCookie(name) {
+			let cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+				const cookies = document.cookie.split(';');
+				for (let i = 0; i < cookies.length; i++) {
+				const cookie = cookies[i].trim();
+				// Does this cookie string begin with the name we want?
+				if (cookie.substring(0, name.length + 1) === (name + '=')) {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					break;
+				}
+				}
+			}
+			return cookieValue;
+			}
+
+			function sendMessage() {
+			const messageText = userInput.value.trim();
+			
+			if (messageText) {
+				const messageElement = document.createElement("div");
+				messageElement.classList.add("user-message_feedback");
+				messageElement.textContent = messageText;
+				messages.appendChild(messageElement);
+				userInput.value = "";
+				//alert(messageText)
+				// Send message to server
+				const csrfToken = getCookie('csrftoken');
+				fetch('/feedback/', {
+					method: 'POST',
+					body: JSON.stringify({'content': messageText}),
+					headers: {'Content-Type': 'application/json', 'X-CSRFToken': csrfToken}
+				})
+				.then(response => response.json())
+				.then(data => {
+				// Display response message
+				const responseText = data.message;
+				const responseElement = document.createElement("div");
+				responseElement.classList.add("server-message");
+				responseElement.textContent = responseText;
+				messages.appendChild(responseElement);
+				})
+				.catch(error => {
+				console.error('Error:', error);
+				// Display error message
+				const errorText = 'An error occurred while sending feedback.';
+				const errorElement = document.createElement("div");
+				errorElement.classList.add("server-error");
+				errorElement.textContent = errorText;
+				messages.appendChild(errorElement);
+				});
+			}
+			}
+
+				
+			
+			}
+				
+				);
+
+			</script>
+		</head>
+		<body>
+			{% load static %}
+
+			
+			<!-- Start Header Area -->
+			<header class="default-header">
+				<nav class="navbar navbar-expand-lg navbar-light">
+					<div class="container">
+						  <a class="navbar-brand" href="#" onclick="redirectToIndex(event)">
+							<img src="{% static 'media/src/img/first_page_logo.jpeg' %}" alt="" width="20%" height="20%">
+						  </a>
+						  
+						  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						  </button>
+	
+						  <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+							<ul class="navbar-nav">
+								<li><a href="{% url 'blog' %}">HOME</a></li>
+								<li><a href="{% url 'blog_list' %}">BLOG</a></li>
+								<li><a href="{% url 'write' %}">NEW</a></li>
+								<li><a href="{% url 'search' %}">SEARCH</a></li>
+								<li><a href="{% url 'article_follow_list' %}">follow</a></li>
+								<!-- Dropdown -->
+															
+							</ul>
+						  </div>	
+						  		
+						  
+						  
+
+
+					</div>
+					<div class="tooltip1">
+						<a class="navbar-brand" href="{% url 'homegape' %}" >
+							<img src="{% static user.avatar.url %}" alt="" width="50" height="50">
+						</a>
+						<span class="tooltiptext1">Welcom {{user.username}}</span>
+					</div>	
+					
+
+				</nav>
+			</header>
+			<!-- End Header Area -->
+
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home" data-parallax="scroll" data-image-src="{% static 'media/src/img/back_ground.jpg' %}" alt="Nothing here">
+				<div class="overlay-bg overlay"></div>
+				<div class="container">
+					<div class="row fullscreen">
+						<div class="banner-content d-flex align-items-center col-lg-12 col-md-12">
+							<h1>
+								Try your best to gain. <br>
+								Graduate Placement Service.								
+							</h1>
+						</div>	
+											
+					</div>
+				</div>
+			</section>
+			<!-- End banner Area -->	
+
+			<div id="popup"></div>
+			<!-- Start category Area -->
+
+			
+
+			<section class="category-area section-gap" id="news">
+				
+
+				<div class="container">
+					<form id="search-form" action="{% url 'search_result' %}" method="GET">
+						<div id="imaginary_container"> 
+							<div class="input-group stylish-input-group" id="search-box">
+								<select class="search-select" name="search" id="search-select">
+									<option value="ielts_score">Ielts score</option>
+									<option value="gpa">GPA</option>
+									<option value="major">Majority</option>
+									<option value="institution">Graduation destination</option>
+								</select>
+								<input type="text" class="form-control" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" required="" id="search-query" name="q">
+								<span class="input-group-addon">
+									<button type="submit" id="search-button">
+										<span class="lnr lnr-magnifier"></span>
+									</button>  
+								</span>
+							</div>                            
+							<div id="post-area"></div>                           
+						</div>
+					</form>
+					<br><br>
+					<div class="row d-flex justify-content-center">
+						
+						<div class="menu-content pb-70 col-lg-8">
+							
+							<div class="title text-center">
+								<h1 class="mb-10">Senior Notes For You</h1>
+								<p>Some graduated senior notes can provide reference and help for your study or career planning.</p>
+							</div>
+						</div>
+					</div>						
+					
+					<div class="active-cat-carusel">
+
+
+						{% for article in Article_selected %}
+							
+						<div class="item single-cat">
+							<img src="{% static article.cover_url %}" alt="" href="{% url 'article_detail' article.id%}">
+							<p class="date">>{{ article.created_at|date:"M d " }}</p>
+							<h4><a href="{% url 'article_detail' article.id%}">{{ article.title }}</a></h4>
+						</div>
+						
+							
+						{% endfor %}
+
+						
+											
+					</div>												
+				</div>	
+			</section>
+			<!-- End category Area -->
+			
+			<!-- Start travel Area -->
+			<section class="travel-area section-gap" id="travel">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">The latest employment, further education blog</h1>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
+							</div>
+						</div>
+					</div>						
+					<div class="row">
+						<div class="col-lg-6 travel-left">
+							{% for article in latest_articles %}
+							{% if forloop.counter|divisibleby:2 %}
+							<div class="single-travel media">
+								<a href="{% url 'personal_homepage_other' username=article.author.username %}">
+									<img class="img-fluid d-flex  mr-3" style="width: 200px;height: 200px;" src="{% static article.author.avatar.url %}" alt="">
+								</a>
+								<div class="dates">
+									<span>{{ article.created_at.day }}</span>
+									<p>{{ article.created_at|date:"M" }}</p>
+								</div>
+								<div class="media-body align-self-center">
+									<h4 class="mt-0"><a href="{% url 'article_detail' article.id%}">{{ article.title }}</a></h4>
+									<p>{{ article.content|slice:":40" }}{% if article.content.split|length > 20 %}...{% endif %}</p>
+									<div class="meta-bottom d-flex justify-content-between">
+										<p><span class="lnr lnr-heart"></span> {{ article.likes.count }} Likes</p>
+										<p><span class="lnr lnr-bubble"></span> {{ article.comments.count }} Comments</p>
+									</div>							 
+								</div>
+							</div>
+							<br><br>
+							{% endif %}
+							{% endfor %}													
+						</div>
+						<div class="col-lg-6 travel-right">
+							{% for article in latest_articles %}
+							{% if forloop.counter|divisibleby:2 == False %}
+							<div class="single-travel media">
+								<a href="{% url 'personal_homepage_other' username=article.author.username %}">
+									<img class="img-fluid d-flex  mr-3" style="width: 200px;height: 200px;" src="{% static article.author.avatar.url %}" alt="">
+								</a>
+								
+								<div class="dates">
+									<span>{{ article.created_at.day }}</span>
+									<p>{{ article.created_at|date:"M" }}</p>
+								</div>
+								<div class="media-body align-self-center">
+									<h4 class="mt-0"><a href="{% url 'article_detail' article.id%}">{{ article.title }}</a></h4>
+									<p>{{ article.content|slice:":40" }}{% if article.content.split|length > 20 %}...{% endif %}</p>
+
+									<div class="meta-bottom d-flex justify-content-between">
+										<p><span class="lnr lnr-heart"></span> {{ article.likes.count }} Likes</p>
+										<p><span class="lnr lnr-bubble"></span> {{ article.comments.count }} Comments</p>
+									</div>							 
+								</div>
+							</div>
+							<br><br>
+							{% endif %}
+							{% endfor %}
+
+
+						</div>		
+					</div>
+				</div>					
+			</section>
+			<!-- End travel Area -->
+			
+			<!-- Start fashion Area -->
+			<section class="category-area section-gap" id="news">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">Senior Notes For You</h1>
+								<p>Some graduated senior notes can provide reference and help for your study or career planning.</p>
+							</div>
+						</div>
+					</div>						
+					<div class="active-cat-carusel">
+
+						
+						{% for user_in in active_users %}
+							
+						<div class="item single-cat">
+							<img src="{% static user_in.avatar.url %}"  style="width: 300px;height: 300px;" alt="" href="{% url 'personal_homepage_other' username=user_in.username %}">
+							
+							<h4><a href="{% url 'personal_homepage_other' username=user_in.username %}">{{ user_in.username }}</a></h4>
+						</div>
+						
+							
+						{% endfor %}
+					</div>												
+				</div>	
+			</section>
+			<!-- End fashion Area -->
+			
+			<!-- Start team Area -->
+			<section class="team-area section-gap" id="team">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h1 class="mb-10">About Blogger Team</h1>
+								<p>Who are in extremely love with eco friendly system.</p>
+							</div>
+						</div>
+					</div>						
+					<div class="row justify-content-center d-flex align-items-center">
+						<div class="col-lg-6 team-left">
+							<p>
+								{{team_intro.description|linebreaksbr|safe}}
+							</p>
+						</div>
+						<div class="col-lg-6 team-right d-flex justify-content-center">
+							<div class="row active-team-carusel">
+								{% for admin in admins %}
+									<div class="single-team">
+										<div class="thumb">
+											<img class="img-fluid" src="{% static admin.avatar.url %}" alt="{{ admin.avatar.url }}" >
+											<div class="align-items-center justify-content-center d-flex">
+												<a href="#"><i class="fa fa-facebook"></i></a>
+												<a href="#"><i class="fa fa-twitter"></i></a>
+												<a href="#"><i class="fa fa-linkedin"></i></a>
+											</div>
+										</div>
+										<div class="meta-text mt-30 text-center">
+											<h4>{{ admin.real_name }}</h4>
+											<p>{{ admin.task_statement }}</p>			    
+										</div>
+									</div>
+								{% endfor %}
+												
+							</div>
+						</div>
+					</div>
+				</div>	
+				
+			</section>
+			<!-- End team Area -->
+			<button id="floatingButton">Contact us</button>
+
+				<div id="chatModal" class="modala hiddena">
+					<div class="modala-content">
+						<h3>Feedback</h3>
+					  <span class="close">&times;</span>
+					  <div id="messages"></div>
+					  
+					  <div class="input-area">
+						<input id="userInput" type="text" placeholder="输入你的问题...">
+						<button id="sendButton">send</button>
+					  </div>
+					</div>
+				  </div>
+				
+				  
+			<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+			<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+			<script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+			<script src="{% static 'js/parallax.min.js' %}"></script>			
+			<script src="{% static 'js/owl.carousel.min.js' %}"></script>		
+			<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>				
+			<script src="{% static 'js/jquery.sticky.js' %}"></script>
+			<script defer src="{% static 'js/main.js' %}"></script>	
+			
+</div>
+
+
+<script src="js/jump_page.js"></script>
+<script src="js/add_user_urls.js"></script>
+
+
+
+
+</body>
+</html>

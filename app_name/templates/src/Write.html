@@ -1,0 +1,184 @@
+	<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/elements/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="colorlib">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Blogger</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+			<!--
+			CSS
+			============================================= -->
+			{% load static %}
+			<link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+			<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+			<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+			<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">			
+			<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+			<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'css/main.css' %}">
+			<link rel="stylesheet" href="{% static 'css/button.css' %}">
+		</head>
+		<body>
+			<link rel="stylesheet" type="text/css" href="{% static 'poup.css' %}">
+			<div class="hover-box">Welcome
+				<h5 id="username" ></h5>
+			</div>
+
+			<!-- Start Header Area -->
+            <header class="default-header">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container">
+                          <a class="navbar-brand" href="index.html">
+                            <img src="{% static 'media/src/img/first_page_logo.jpeg' %}" alt="" width="20%" height="20%">
+                          </a>
+                          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+
+                          <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                            <ul class="navbar-nav scrollable-menu">
+                                <li><a href="{% url 'blog' %}">HOME</a></li>
+								<li><a href="{% url 'blog_list' %}">BLOG</a></li>
+								<li><a href="{% url 'write' %}">NEW</a></li>
+								<li><a href="{% url 'search' %}">SEARCH</a></li>
+								<li><a href="{% url 'article_follow_list' %}">follow</a></li>
+								<!-- Dropdown -->
+                                                            
+                            </ul>
+                          </div>                        
+                    </div>
+                    <a class="navbar-brand" href="{% url 'homegape' %}" >
+						<img src="{% static user.avatar.url %}" alt="" width="50" height="50">
+					</a>
+                </nav>
+            </header>
+            <!-- End Header Area -->				
+				
+			</section>		
+			<!-- End banner Area -->
+		
+		
+
+			
+
+<!-- Start post Area -->
+<div class="post-wrapper pt-100">
+	<!-- Start post Area -->
+	<section class="post-area">
+		<div class="container">
+			<div class="row justify-content-center d-flex">
+				
+				<div class="col-lg-8">
+					
+					<div class="container border-top-generic">
+						
+						<h3 class="about-title mb-30">WRITE YOUR BLOG HERE</h3>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="img-text">
+									<form method="post" action="{% url 'write_article' %}">
+										
+										
+									
+								</div>
+							</div>
+						</div>
+						
+					</form>
+					
+					<form method="post" action="{% url 'write_article' %}">
+						{% csrf_token %}
+						<div>
+							<p style="font-weight: bold; font-size: 1.2em; color: #000;">Title: </p>
+							<input name="title" type="text">
+						</div>
+						<div>
+							<p style="font-weight: bold; font-size: 1.2em; color: #000;">Tags: </p>
+							<input name="tags" type="text" placeholder="Enter tags, separated by #">
+						</div>
+						<div>
+							<p style="font-weight: bold; font-size: 1.2em; color: #000;">Text: </p>
+							<textarea name="content" rows="20"></textarea>
+						</div>
+						<br></br>
+						<button style="display: block; margin: 0 auto; text-align: center;" class="large blue button" type="submit">PUBLISH</button>
+					</form>
+					
+				
+				
+				
+				
+				
+				
+				</div>
+								  
+
+
+				</div>
+				<div class="col-lg-4 sidebar-area">
+					
+
+					<div class="single_widget about_widget">
+						<img src="{% static user.avatar.url %}" alt="" width="260" height="260">
+						<h2 class="text-uppercase">{{user.username}}</h2>
+						<p>
+							{{user.personal_statement}}
+						</p>
+						
+					</div>
+					
+					<div class="single_widget recent_widget">
+						<h4 class="text-uppercase pb-20">Recent Posts by you</h4>
+						<div class="active-recent-carusel">
+							{% for article in personal_article %}
+
+								<div class="item">
+									<a href="{% url 'article_detail' article.id%}">
+										<p class="mt-20 title text-uppercase" >     {{ article.title }}</p>
+									</a>
+									<p>{{ article.author.username }} <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
+									{{ article.likes.count }} <i class="fa fa-comment-o" aria-hidden="true"></i>{{ article.comments.count }}</span></p>    
+								</div>
+							
+						{% endfor %}                                                                                             
+						</div>
+					</div>  
+					
+															
+				</div>
+			</div>
+		</div>    
+	</section>
+	<!-- End post Area -->  
+</div>
+<!-- End post Area -->
+
+
+
+
+		<script src="js/vendor/jquery-2.2.4.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+		<script src="js/vendor/bootstrap.min.js"></script>
+		<script src="js/jquery.ajaxchimp.min.js"></script>
+		<script src="js/jquery.sticky.js"></script>
+		<script src="js/owl.carousel.min.js"></script>
+		<script src="js/jquery.nice-select.min.js"></script>
+		<script src="js/jquery.magnific-popup.min.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/jump_page.js"></script>
+		<script src="js/add_user_urls.js"></script>
+	</body>
+
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/fav.png">
+    <!-- Author Meta -->
+    <meta name="author" content="colorlib">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>Blogger</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+        <!--
+        CSS
+        ============================================= -->
+        {% load static %}
+		<link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+		{% load static %}
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+    </head>
+    <body>
+        
+
+        <!-- Start Header Area -->
+        <header class="default-header">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                      <a class="navbar-brand" href="index.html">
+                        <img src="{% static 'media/src/img/first_page_logo.jpeg' %}" alt="" width="20%" height="20%">
+                      </a>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+
+                      <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                        <ul class="navbar-nav scrollable-menu">
+                            <li><a href="{% url 'blog' %}">HOME</a></li>
+                            <li><a href="{% url 'blog_list' %}">BLOG</a></li>
+                            <li><a href="{% url 'write' %}">NEW</a></li>
+                            <li><a href="{% url 'search' %}">SEARCH</a></li>
+                            <li><a href="#team">team</a></li>
+                            <!-- Dropdown -->
+                            <li class="dropdown">
+                              <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                Pages
+                              </a>
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item" href="single.html">Single</a>
+                                <a class="dropdown-item" href="category.html">Category</a>
+                                <a class="dropdown-item" href="search.html">Search</a>
+                                <a class="dropdown-item" href="archive.html">Archive</a>
+                                <a class="dropdown-item" href="generic.html">Generic</a>
+                                <a class="dropdown-item" href="elements.html">Elements</a>
+                              </div>
+                            </li>                               
+                        </ul>
+                      </div>                        
+                </div>
+                <a class="navbar-brand" href="{% url 'homegape' %}" >
+                    <img src="{% static user.avatar.url %}" alt="" width="50" height="50">
+                </a>
+            </nav>
+        </header>
+        <!-- End Header Area -->
+
+        <!-- Start top-section Area -->
+        <section class="top-section-area section-gap">
+            <div class="container">
+                <div class="row justify-content-center align-items-center d-flex">
+                    <div class="col-lg-8">
+                        <form id="search-form" action="{% url 'search_result' %}" method="GET">
+                            <div id="imaginary_container"> 
+                                <div class="input-group stylish-input-group" id="search-box">
+                                    <select class="search-select" name="search" id="search-select">
+                                        <option value="ielts_score">Ielts score</option>
+                                        <option value="gpa">GPA</option>
+                                        <option value="major">Majority</option>
+                                        <option value="institution">Graduation destination</option>
+                                    </select>
+                                    <input type="text" class="form-control" placeholder="Search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search'" required="" id="search-query" name="q">
+                                    <span class="input-group-addon">
+                                        <button type="submit" id="search-button">
+                                            <span class="lnr lnr-magnifier"></span>
+                                        </button>  
+                                    </span>
+                                </div>                            
+                                <div id="post-area"></div>                           
+                            </div>
+                        </form>
+                        
+                        <p class="mt-20 text-center text-white">{{offers.count}} results found for “Addictionwhen gambling”</p>
+                    </div>
+                </div>
+                
+            </div>  
+            <!-- Start post Area -->
+        
+        </section>
+        <!-- End top-section Area -->
+
+
+            <!-- Start post Area -->
+            
+    <div class="post-wrapper pt-100">
+        <!-- Start post Area -->
+        <section class="post-area">
+            <div class="container">
+                <div class="row justify-content-center d-flex">
+                    <div class="col-lg-8">
+                        <div class="post-lists search-list">
+                            <div class="single_widget recent_widget">
+                                <h4 class="text-uppercase pb-20">Offer list:</h4>
+                            {% for offer in offers %}
+                                <div class="single-list flex-row d-flex">
+                                    <div class="thumb">
+                                        <div class="date">
+                                            <span>{{ offer.received_at|date:"d " }}</span><br>{{ article.created_at|date:"M" }}
+                                        </div>
+                                        <a href="{% url 'personal_homepage_other' username=offer.applicant.username %}">
+                                            <img class="img-fluid d-flex  mr-3" style="width: 200px;height: 200px;" src="{% static offer.applicant.avatar.url %}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="detail" style="width: 65%;">
+                                        <a href="{% url 'offer_detail' offer.offer_id %}">
+                                            <h4 class="about-title mb-30">{{ offer.applicant.username|linebreaksbr|safe }}</h4>
+                                            <table border="1" style="width: 100%;">
+                                                <tr>
+                                                    <td>GPA</td>
+                                                    <td>IELTS</td>
+                                                    <td>SCHOOL</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{offer.gpa}}</td>
+                                                    <td>{{offer.ielts_score}}</td>
+                                                    <td>{{offer.institution}}</td>
+                                                </tr>
+                                            </table>
+                                        </a>
+                                        <p class="footer pt-20"></p>
+                                    </div>
+                                    
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                          
+                    </div>
+                    <div class="col-lg-4 sidebar-area">
+                        
+
+                        <div class="single_widget about_widget">
+                            <img src="{% static user.avatar.url %}" alt="" width="260" height="260">
+                            <h2 class="text-uppercase">{{user.username}}</h2>
+                            <p>
+                                {{user.personal_statement}}
+                            </p>
+                            
+                        </div>
+                        
+                        <div class="single_widget recent_widget">
+                            <h4 class="text-uppercase pb-20">Recent Posts</h4>
+                            <div class="active-recent-carusel">
+                                {% for article in personal_article %}
+   
+                                    <div class="item">
+                                        <a href="{% url 'article_detail' article.id%}">
+                                            <p class="mt-20 title text-uppercase" >     {{ article.title }}</p>
+                                        </a>
+                                        <p>{{ article.author.username }} <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                        {{ article.likes.count }} <i class="fa fa-comment-o" aria-hidden="true"></i>{{ article.comments.count }}</span></p>    
+                                    </div>
+                                
+                            {% endfor %}                                                                                             
+                            </div>
+                        </div>  
+                        <div class="single_widget cat_widget">
+                            <h4 class="text-uppercase pb-20">private message to {{user.username}}</h4>
+                            <ul>
+                                
+								{% for message in private_message %}
+                                <li>
+                                    <a class="show-popup" data-target="popup-{{ forloop.counter }}">{{ message.content|slice:":10" }} <span>{{ message.sender }}</span></a>
+                                </li>
+
+                                <div class="popup1" id="popup-{{ forloop.counter }}">
+                                    <span class="close">&times;</span>
+                                    <div class="popup-content">
+                                        <h2>Reply message</h2>
+                                        <a><h4>Message:{{ message.content}}</h4></a>
+                                        <form method="POST" action="{% url 'send_message' message.sender.username %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="current_url" value="{{ request.path }}">
+                                            <label for="content">Message:</label>
+                                            <textarea id="content" name="content" required></textarea>
+                                            <button type="submit">Send</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endfor %}
+ 
+                                
+                                
+
+                            </ul>
+                        </div> 
+                                                                
+                    </div>
+                </div>
+            </div>    
+        </section>
+        <!-- End post Area -->  
+    </div>
+    <!-- End post Area -->
+    
+
+              
+
+
+    </body>
+</html>

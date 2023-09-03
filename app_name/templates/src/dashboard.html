@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <title>控制面板</title>
+   <!-- Tell the browser to be responsive to screen width -->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- Theme style -->
+     <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://adminlte.io/themes/AdminLTE/dist/css/AdminLTE.min.css">
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
+ </head>
+ <body>
+    
+ <div class="wrapper">
+    
+        
+    
+  <!-- Main content -->
+     <p class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div id="gpaPercentagesData" data-percentages="{{ gpa_percentages|safe }}" style="display:none;"></div>
+				<br>
+                
+				<h3>GPA distribution of all applicants</h3>
+				<br>
+				<div style="display: flex; justify-content: center; width: 100%;">
+					<div style="width: 400px; height: 400px;">
+					<canvas id="gpaPercentageChart"></canvas>
+				</div>
+			</div>
+
+
+        
+
+            <div id="article_publish_past_week_data" data-percentages="{{ article_publish_past_week|safe }}" style="display:none;"></div>
+				<br>
+                
+				<h3>Number of forum posts in the last seven days</h3>
+				<br>
+				<div style="display: flex; justify-content: center; width: 100%;">
+					<div style="width: 800px; height: 800px;">
+					<canvas id="loginChart"></canvas>
+				</div>
+			</div>
+            </div>
+        </div>
+       <div class="container-fluid">
+
+        
+         <!-- Small boxes (Stat box) -->
+         <div class="row">
+           <div class="col-sm-3">
+             <!-- small box -->
+             <div class="small-box bg-info">
+               <div class="inner">
+                 <h3>{{ user_count }}</h3>
+ 
+                 <p>用户总数</p>
+               </div>
+               <div class="icon">
+                 <i class="ion ion-bag"></i>
+               </div>
+               <a href="#" class="small-box-footer">更多信息 <i class="fas fa-arrow-circle-right"></i></a>
+             </div>
+           </div>
+           <!-- ./col -->
+           <div class="col-sm-3">
+             <!-- small box -->
+             <div class="small-box bg-success">
+               <div class="inner">
+                 <h3>{{ article_count }}</h3>
+                 <p>博客总数</p>
+               </div>
+               <div class="icon">
+                 <i class="ion ion-stats-bars"></i>
+               </div>
+               <a href="#" class="small-box-footer">更多信息 <i class="fas fa-arrow-circle-right"></i></a>
+             </div>
+           </div>
+           <!-- ./col -->
+              <div class="col-sm-3">
+             <!-- small box -->
+             <div class="small-box bg-info">
+               <div class="inner">
+                 <h3>{{ offer_count }}</h3>
+ 
+                 <p>案例总数</p>
+               </div>
+               <div class="icon">
+                 <i class="ion ion-bag"></i>
+               </div>
+               <a href="#" class="small-box-footer">更多信息 <i class="fas fa-arrow-circle-right"></i></a>
+             </div>
+           </div>
+           <!-- ./col -->
+           <div class="col-sm-3">
+             <!-- small box -->
+             <div class="small-box bg-success">
+               <div class="inner">
+                 <h3>{{ feedback_count }}</h3>
+ 
+                 <p>反馈总数</p>
+               </div>
+               <div class="icon">
+                 <i class="ion ion-stats-bars"></i>
+               </div>
+               <a href="#" class="small-box-footer">更多信息 <i class="fas fa-arrow-circle-right"></i></a>
+             </div>
+           </div>
+           <!-- ./col -->
+
+         </div>
+       </div>
+
+       <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-sm-3">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{ Alumni_count }}</h3>
+
+                <p>校友用户总数</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="#" class="small-box-footer">更多信息 <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-sm-3">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{ num_logins_today }}</h3>
+                <p>今日用户登录</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">更多信息 <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+             <div class="col-sm-3">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{ Comment_count }}</h3>
+
+                <p>评论总数</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="#" class="small-box-footer">更多信息 <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-sm-3">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{ Like_count }}</h3>
+
+                <p>点赞总数</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="#" class="small-box-footer">更多信息 <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+
+        </div>
+      </div>
+
+     </p>
+   </div>
+
+   <script>
+    // 获取 canvas 元素
+    const ctx = document.getElementById('gpaPercentageChart').getContext('2d');
+
+    // 从隐藏的 div 元素获取后端数据
+    const gpaPercentagesData = document.getElementById('gpaPercentagesData');
+    const gpaPercentages = JSON.parse(gpaPercentagesData.getAttribute('data-percentages'));
+
+    // 饼状图的颜色
+    const colors = [
+        '#FF6384',
+        '#36A2EB',
+        '#FFCE56',
+        '#4BC0C0',
+        '#FF9F40',
+        '#9966FF',
+    ];
+
+    // 饼状图的标签
+    const labels = [
+        '0-2',
+        '2-2.5',
+        '2.5-3',
+        '3-3.5',
+        '3.5-3.8',
+        '3.8+',
+    ];
+
+    // 创建饼状图
+    const gpaPercentageChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: gpaPercentages,
+                backgroundColor: colors,
+            }],
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    
+                }
+            }
+        }
+    });
+
+    
+    const loginChartDataElement = document.getElementById('article_publish_past_week_data');
+    const loginChartData = JSON.parse(loginChartDataElement.getAttribute('data-percentages'));
+
+    const loginChartLabels = ['6 days ago', '5 days ago', '4 days ago', '3 days ago', '2 days ago', '1 day ago', 'Today'];
+
+    const ctx1 = document.getElementById('loginChart').getContext('2d');
+    const loginChart = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: loginChartLabels,
+            datasets: [{
+                label: 'Daily Articles',
+                data: loginChartData,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                tension: 0.2,
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
+
+</script>
+
+ </body>

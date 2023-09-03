@@ -1,0 +1,45 @@
+.post-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .case-div {
+    width: 50%; /* 设置每个框的宽度 */
+    margin: opx 0; /* 修改框之间的上下间距 */
+    padding: 5px;
+    box-sizing: border-box; /* 确保border和padding不会影响框的大小 */
+    text-align: center;
+  }
+  .case-div:not(:first-child) {
+    border-top: 1px solid #d7d7d7; /* 添加顶部边框作为分隔符 */
+  }
+  
+  
+  .case-element {
+    margin-bottom: 5px;
+  }
+  
+  .case-label {
+    font-weight: bold;
+  }
+  
+  .case-value {
+    color: #000000;
+  }
+  .case-element-row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .case-element {
+    margin-right: 20px;
+  }
+  
+  .case-label {
+    font-weight: bold;
+  }
+  
+  .case-value {
+    margin-left: 5px;
+  }
+  

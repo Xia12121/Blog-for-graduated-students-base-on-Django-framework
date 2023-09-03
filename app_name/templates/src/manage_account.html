@@ -1,0 +1,506 @@
+{% load static %}
+    <!DOCTYPE html>
+    <html lang="zxx" class="no-js">
+    <head>
+        <!-- Mobile Specific Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Favicon-->
+        <link rel="icon" href="{% static 'media/fav.png' %}">
+        <!-- Author Meta -->
+        <meta name="author" content="colorlib">
+        <!-- Meta Description -->
+        <meta name="description" content="">
+        <!-- Meta Keyword -->
+        <meta name="keywords" content="">
+        <!-- meta character set -->
+        <meta charset="UTF-8">
+        <!-- Site Title -->
+        <title>Blogger</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+
+        <style type="text/css">
+            .popup1 {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 600px; /* 修改宽度 */
+                height: 900px; /* 修改高度 */
+                background-color: #fff;
+                box-shadow: 0px 0px 10px #888888;
+                z-index: 9999;
+                display: none;
+            }
+            .popup-content {
+                padding: 90px;
+                text-align: center;
+            }
+            .close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+                font-size: 24px;
+            }
+        </style>
+
+            <!--
+            CSS
+            ============================================= -->
+            <link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+            <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+            <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+            <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+            <link rel="stylesheet" href="{% static 'css/main.css' %}">
+            <style>
+                .search_school-box {
+                    display: inline-block;
+                    position: relative;
+                    
+                }
+                .search_school-box input {
+                width: 200px;
+                height: 30px;
+                border: 1px solid #ccc;
+                padding: 2px 5px;
+            }
+        
+            .search_school-box ul {
+                position: absolute;
+                left: 0;
+                top: 32px;
+                z-index: 10;
+                width: 200px;
+                background: white;
+                border: 1px solid #ccc;
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: none;
+            }
+        
+            .search_school-box ul.visible {
+                display: block;
+            }
+        
+            .search_school-box ul li {
+                padding: 5px;
+                cursor: pointer;
+            }
+        
+            .search_school-box ul li:hover {
+                background-color: #f1f1f1;
+            }
+        </style>
+        <script>
+            function search_school() {
+                let input = document.getElementById("search_schoolInput");
+                let filter = input.value.toUpperCase();
+                let ul = document.getElementById("search_schoolList");
+                let li = ul.getElementsByTagName("li");
+        
+                for (let i = 0; i < li.length; i++) {
+                    let txtValue = li[i].textContent || li[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+            }
+        
+            function toggleDropdown(show) {
+                let ul = document.getElementById("search_schoolList");
+                if (show) {
+                    ul.classList.add("visible");
+                } else {
+                    ul.classList.remove("visible");
+                }
+            }
+        
+            function selectItem(item) {
+                let input = document.getElementById("search_schoolInput");
+                input.value = item.innerHTML;
+                toggleDropdown(false);
+            }
+        </script>
+
+
+
+        <style>
+            .search_school1-box {
+                display: inline-block;
+                position: relative;
+                
+            }
+            .search_school1-box input {
+            width: 200px;
+            height: 30px;
+            border: 1px solid #ccc;
+            padding: 2px 5px;
+        }
+
+        .search_school1-box ul {
+            position: absolute;
+            left: 0;
+            top: 32px;
+            z-index: 10;
+            width: 200px;
+            background: white;
+            border: 1px solid #ccc;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+        }
+
+        .search_school1-box ul.visible {
+            display: block;
+        }
+
+        .search_school1-box ul li {
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .search_school1-box ul li:hover {
+            background-color: #f1f1f1;
+        }
+        </style>
+        <script>
+        function search_school1() {
+            let input = document.getElementById("search_school1Input");
+            let filter = input.value.toUpperCase();
+            let ul = document.getElementById("search_school1List");
+            let li = ul.getElementsByTagName("li");
+
+            for (let i = 0; i < li.length; i++) {
+                let txtValue = li[i].textContent || li[i].innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+
+        function toggleDropdown1(show) {
+            let ul = document.getElementById("search_school1List");
+            if (show) {
+                ul.classList.add("visible");
+            } else {
+                ul.classList.remove("visible");
+            }
+        }
+
+        function selectItem1(item) {
+            let input = document.getElementById("search_school1Input");
+            input.value = item.innerHTML;
+            toggleDropdown1(false);
+        }
+        </script>
+
+
+
+
+        </head>
+        <body>
+
+            <!-- Start Header Area -->
+            <header class="default-header">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container">
+                          <a class="navbar-brand" href="index.html">
+                            <img src="{% static 'media/src/img/first_page_logo.jpeg' %}" alt="" width="20%" height="20%">
+                          </a>
+                          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+
+                          <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+                            <ul class="navbar-nav scrollable-menu">
+                                <li><a href="{% url 'blog' %}">HOME</a></li>
+								<li><a href="{% url 'blog_list' %}">BLOG</a></li>
+								<li><a href="{% url 'write' %}">NEW</a></li>
+								<li><a href="{% url 'search' %}">SEARCH</a></li>
+								<li><a href="{% url 'article_follow_list' %}">follow</a></li>
+								<!-- Dropdown -->
+                                <li class="dropdown">
+                                  <a class="dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                    Pages
+                                  </a>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="single.html">Single</a>
+                                    <a class="dropdown-item" href="category.html">Category</a>
+                                    <a class="dropdown-item" href="search.html">Search</a>
+                                    <a class="dropdown-item" href="archive.html">Archive</a>
+                                    <a class="dropdown-item" href="generic.html">Generic</a>
+                                    <a class="dropdown-item" href="elements.html">Elements</a>
+                                  </div>
+                                </li>                               
+                            </ul>
+                          </div>                        
+                    </div>
+                    <a class="navbar-brand" href="{% url 'homegape' %}" >
+						<img src="{% static user.avatar.url %}" alt="" width="50" height="50">
+					</a>
+                </nav>
+            </header>
+            <!-- End Header Area -->
+
+            <!-- Start top-section Area -->
+            <section class="top-section-area section-gap">
+                <div class="container">
+                    <div class="row justify-content-start align-items-center d-flex">
+                        <div class="col-lg-8 top-left">
+                            <h1 class="text-white mb-20">management page</h1>
+                            
+                        </div>
+                    </div>
+                </div>  
+            </section>
+            <!-- End top-section Area -->
+
+    
+    <!-- Start post Area -->
+    <div class="post-wrapper pt-100">
+        <!-- Start post Area -->
+        <section class="post-area">
+            <div class="container">
+                <div class="row justify-content-center d-flex">
+                    
+                    <div class="col-lg-8">
+                        
+                        <div class="single_widget recent_widget">
+                            <h4 class="text-uppercase pb-20">you can manage your account here:</h4>
+                            <div class="active-recent-carusel">
+                                
+                                <div>
+                                    <span class="close">&times;</span>
+                                    <div>
+                                      <form method="post" enctype="multipart/form-data" action="{% url 'upload_avatar' %}">
+                                        {% csrf_token %}
+                                        {{ form.as_p }}
+                                        <input type="file" name="avatar" id="id_avatar" accept="image/*">
+                                        <input type="submit" value="保存">
+                                      </form>
+                                  
+                                      <form method="post" action="{% url 'update_personal_statement' %}">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                          <label for="personal_statement">个人陈述：</label>
+                                          <textarea class="form-control" name="personal_statement" id="personal_statement" rows="3">{{ user.personal_statement }}</textarea>
+                                        </div>
+                                        <input type="submit" class="btn btn-primary" value="保存">
+                                      </form>
+    
+                                      <form method="post" action="{% url 'modify_password_here' %}">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                          <label for="old_password">旧密码：</label>
+                                          <input type="password" class="form-control" name="old_password" id="old_password" required>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="new_password">新密码：</label>
+                                          <input type="password" class="form-control" name="new_password" id="new_password" required>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="confirm_password">确认新密码：</label>
+                                          <input type="password" class="form-control" name="confirm_password" id="confirm_password" required>
+                                        </div>
+                                        <input type="submit" class="btn btn-primary" value="保存">
+                                      </form>
+                                      <form method="post" enctype="multipart/form-data" action="{% url 'create_offer' %}">
+                                        {% csrf_token %}
+                                        <label for="gpa">绩点：</label><br>
+                                        <input class="form-control" type="number" name="gpa" min="0" max="4" step="0.01" required><br>
+                                        <label for="ielts_score">雅思成绩：</label><br>
+                                        <input class="form-control" type="number" name="ielts_score" min="0" max="9" step="0.5" required><br>
+
+                                        <label for="institution">院校或单位：</label>
+                                        <div class="form-control">
+                                            <div class="search_school-box" style="box-sizing: border-box; width: 100%;">
+                                            <input type="text" id="search_schoolInput" name="institution" style="box-sizing: border-box; width: 100%;" onkeyup="search_school()" onclick="toggleDropdown(true)" placeholder="搜索..." required>
+                                            
+                                            <ul id="search_schoolList" style="box-sizing: border-box; width: 100%;">
+                                                {% for school in schools %}
+                                                <li onclick="selectItem(this)">{{school.name}}</li>
+                                               
+                                                {% endfor %} 
+                                            </ul>
+                                            </div>
+                                        </div><br>
+                                        
+                                        <label for="major">专业：</label>
+                                       
+                                        <div class="form-control">
+                                            <div class="search_school1-box" style="box-sizing: border-box; width: 100%;">
+                                            <input type="text" id="search_school1Input" name="major" style="box-sizing: border-box; width: 100%;" onkeyup="search_school1()" onclick="toggleDropdown1(true)" placeholder="搜索..." required>
+                                            
+                                            <ul id="search_school1List" style="box-sizing: border-box; width: 100%;">
+                                                {% for major in majors %}
+                                                <li onclick="selectItem1(this)">{{major.name}}</li>
+                                               
+                                                {% endfor %} 
+                                            </ul>
+                                            </div>
+                                        </div><br>
+                                        <label for="offer_image">Offer图片：</label>
+                                        <input type="file" name="offer_image" required><br>
+                                        
+                                        <button class="btn btn-primary" type="submit">上传</button>
+                                        
+                                    </form>
+                                    
+                                    </div>
+                                  </div>
+
+                                <!--在这里添加管理员界面！！-->
+                            </div>
+                        </div> 
+                                      
+
+
+                    </div>
+                    <div class="col-lg-4 sidebar-area">
+                        <div class="single_widget search_widget">
+                            <div id="imaginary_container"> 
+                                <div class="input-group stylish-input-group">
+                                    <input type="text" class="form-control"  placeholder="Search" >
+                                    <span class="input-group-addon">
+                                        <button type="submit">
+                                            <span class="lnr lnr-magnifier"></span>
+                                        </button>  
+                                    </span>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="single_widget about_widget">
+                            <img src="{% static user.avatar.url %}" href="javascript:void(0)" alt="" class="" width="260" height="260" >
+                            <h2 class="text-uppercase">{{user.username}}</h2>
+                            <p>
+                                {{user.personal_statement}}
+
+
+                               
+                    
+                            </p>
+                            <a href="#" id="show-popup">Manage Account</a>
+
+                            
+                              
+
+
+                           
+                        </div>
+                        
+                        <div class="single_widget recent_widget">
+                            <h4 class="text-uppercase pb-20">Recent Posts</h4>
+                            <div class="active-recent-carusel">
+                                {% for article in personal_article %}
+   
+                                <div class="item">
+                                    <a href="{% url 'article_detail' article.id%}">
+                                        <p class="mt-20 title text-uppercase" >     {{ article.title }}</p>
+                                    </a>
+                                    <p>{{ article.author.username }} <span> <i class="fa fa-heart-o" aria-hidden="true"></i>
+                                    {{ article.likes.count }} <i class="fa fa-comment-o" aria-hidden="true"></i>{{ article.comments.count }}</span></p>    
+                                </div>
+                            
+                        {% endfor %}                                                                                            
+                            </div>
+                        </div>  
+                        <div class="single_widget cat_widget">
+                            <h4 class="text-uppercase pb-20">post archive</h4>
+                            <ul>
+                                {% for message in private_message %}
+                                <li>
+                                    <a class="show-popup" data-target="popup-{{ forloop.counter }}">{{ message.content|slice:":10" }} <span>{{ message.sender }}</span></a>
+                                </li>
+
+                                <div class="popup1" id="popup-{{ forloop.counter }}">
+                                    <span class="close">&times;</span>
+                                    <div class="popup-content">
+                                        <h2>Reply message</h2>
+                                        <a><h4>Message:{{ message.content}}</h4></a>
+                                        <form method="POST" action="{% url 'send_message' message.sender.username %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="current_url" value="{{ request.path }}">
+                                            <label for="content">Message:</label>
+                                            <textarea id="content" name="content" required></textarea>
+                                            <button type="submit">Send</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endfor %}                         
+                            </ul>
+                        </div> 
+                        <div class="single_widget tag_widget">
+                            <h4 class="text-uppercase pb-20">Tag you interested in</h4>
+                            <ul>
+                                {% for tag in tags %}
+                                    <li><a href="{% url 'tag_article' tag_name=tag.name %}">{{ tag.name }}</a></li>
+                                {% empty %}
+                                    <li>This author is lazy and has not written any tags.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>                                    
+                    </div>
+                </div>
+            </div>    
+        </section>
+        <!-- End post Area -->  
+    </div>
+    <!-- End post Area -->
+    
+
+
+        
+
+
+
+
+            <script type="text/javascript">
+		var gpaInput = document.getElementsByName("gpa")[0];
+        gpaInput.addEventListener("input", function(event) {
+        var value = parseFloat(event.target.value);
+        if (isNaN(value) || value < 0 || value > 4) {
+            event.target.setCustomValidity("Please input valid score here");
+        } else {
+            event.target.setCustomValidity("");
+        }
+        });
+
+        var ieltsScoreInput = document.getElementsByName("ielts_score")[0];
+        ieltsScoreInput.addEventListener("input", function(event) {
+        var allowedScores = [0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9];
+        var value = parseFloat(event.target.value);
+        if (isNaN(value) || allowedScores.indexOf(value) === -1) {
+            event.target.setCustomValidity("Please input valid score here");
+        } else {
+            event.target.setCustomValidity("");
+        }
+        });
+
+
+            
+	</script>
+    <script>
+        document.addEventListener("click", function (e) {
+            let searchBox = document.querySelector(".search-box");
+            if (!searchBox.contains(e.target)) {
+                toggleDropdown(false);
+            }
+        });
+
+        document.addEventListener("click", function (e) {
+            let searchBox = document.querySelector(".search-box");
+            if (!searchBox.contains(e.target)) {
+                toggleDropdown1(false);
+            }
+        });
+    </script>
+        </body>
+    </html>
