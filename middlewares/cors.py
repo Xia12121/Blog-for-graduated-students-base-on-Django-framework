@@ -1,4 +1,10 @@
 class CorsMiddleware:
+    """Minimal CORS middleware.
+
+    The project uses django-cors-headers (see settings.MIDDLEWARE), so this
+    hand-rolled middleware is kept only as a lightweight fallback.
+    """
+
     def __init__(self, get_response):
         self.get_response = get_response
 
